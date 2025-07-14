@@ -1,5 +1,6 @@
 package com.hoopdunk.api_hoopdunk.domain;
 
+import com.hoopdunk.api_hoopdunk.dto.user.CreateUserDto;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -7,15 +8,16 @@ import java.time.Instant;
 
 @Entity
 @Table(name = "usuario")
+
 public class User {
 
     @Id //tenho que falar que é um id no banco, se comporte como uma PK
-    @GeneratedValue(strategy = GenerationType.AUTO) //tipo o auto_increment
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //tipo o auto_increment
     private Integer id;
 
     private String nome;
 
-    private String nomePerfil;
+    private String nome_perfil;
 
     private String email;
 
@@ -39,7 +41,7 @@ public class User {
         return this.nome;
     }
     public String getNomePerfil() {
-        return this.nomePerfil;
+        return this.nome_perfil;
     }
     public String getEmail() {
         return this.email;
@@ -64,7 +66,7 @@ public class User {
         this.nome = nome;
     }
     public void setNomePerfil(String nomePerfil) {
-        this.nomePerfil = nomePerfil;
+        this.nome_perfil = nomePerfil;
     }
     public void setEmail(String email) {
         this.email = email;
@@ -82,16 +84,22 @@ public class User {
         this.foto = foto;
     }
 
-//    public User(Integer id, String nome, String nomePerfil, String email, String senha, String posicao, String nivel, String foto, Instant created_at) {
-//          this.id = id;
+
+    public User() {}
+
+//    public User(String nome, String nomePerfil, String email, String senha) {
 //          this.nome = nome;
-//          this.nomePerfil = nomePerfil;
+//          this.nome_perfil = nomePerfil;
 //          this.email = email;
 //          this.senha = senha;
-//          this.posicao = posicao;
-//          this.nivel = nivel;
-//          this.foto = foto;
-//          this.created_at = created_at;
 //    }
+
+    //sobrecarregando construtor para receber a classe DTO para criar um usuario
+    public User(CreateUserDto createUserDto) {
+        this.nome = createUserDto.nome();
+        this.nome_perfil = createUserDto.nomePerfil();
+        this.email = createUserDto.email();
+        this.senha = createUserDto.senha();
+    }
 
 }
