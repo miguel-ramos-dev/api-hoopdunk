@@ -33,7 +33,7 @@ public class UserController {
         var user = userService.getUserById(id);
 
         if(user.isPresent()) {
-            return ResponseEntity.ok(user.get());
+            return ResponseEntity.ok(user.get()); //.get retorna os dados do cara no corpo da requisição
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -42,7 +42,8 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody @Valid CreateUserDto data) {
         var userId = userService.createUser(data);
-        return ResponseEntity.created(URI.create("/usuarios/" + userId.toString())).build();
+//        return ResponseEntity.created(URI.create("/usuarios/" + userId.toString())).build();
+        return ResponseEntity.ok().build();
     }
 
 

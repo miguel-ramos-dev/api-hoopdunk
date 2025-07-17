@@ -17,7 +17,7 @@ public class User {
 
     private String nome;
 
-    private String nome_perfil;
+    private String nomePerfil;
 
     private String email;
 
@@ -41,7 +41,7 @@ public class User {
         return this.nome;
     }
     public String getNomePerfil() {
-        return this.nome_perfil;
+        return this.nomePerfil;
     }
     public String getEmail() {
         return this.email;
@@ -66,7 +66,7 @@ public class User {
         this.nome = nome;
     }
     public void setNomePerfil(String nomePerfil) {
-        this.nome_perfil = nomePerfil;
+        this.nomePerfil = nomePerfil;
     }
     public void setEmail(String email) {
         this.email = email;
@@ -87,17 +87,23 @@ public class User {
 
     public User() {}
 
-//    public User(String nome, String nomePerfil, String email, String senha) {
-//          this.nome = nome;
-//          this.nome_perfil = nomePerfil;
-//          this.email = email;
-//          this.senha = senha;
-//    }
+    //p criar usuario em testes enfim.
+    public User(Integer id, String nome, String nomePerfil, String email, String posicao, String nivel, String senha, String foto) {
+          this.id = id;
+          this.nome = nome;
+          this.nomePerfil = nomePerfil;
+          this.email = email;
+          this.posicao = posicao;
+          this.nivel = nivel;
+          this.senha = senha;
+          this.foto = foto;
+
+    }
 
     //sobrecarregando construtor para receber a classe DTO para criar um usuario
     public User(CreateUserDto createUserDto) {
         this.nome = createUserDto.nome();
-        this.nome_perfil = createUserDto.nomePerfil();
+        this.nomePerfil = createUserDto.nomePerfil();
         this.email = createUserDto.email();
         this.senha = createUserDto.senha();
     }

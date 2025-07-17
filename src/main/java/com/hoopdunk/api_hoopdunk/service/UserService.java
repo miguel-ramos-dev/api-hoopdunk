@@ -24,7 +24,7 @@ public class UserService {
         User usuario = new User(createUserDto);
         var userSaved =  userRepository.save(usuario);
 
-        return userSaved.getId();
+        return userSaved.getId(); //retorna só id do cara que foi criado
     }
 
     public Optional<User> getUserById(Integer userId) {
@@ -36,24 +36,18 @@ public class UserService {
     }
 
     public void updateUserById (Integer userId, UpdateUserDto updateUserDto) {
-        var userEntity = userRepository.findById(userId);
-
+        var userEntity = userRepository.findById(userId); //entidade User
         if(userEntity.isPresent()) { //se existir user
             var user = userEntity.get(); //ele pega o usuario e lança p essa variavel aqui
 
-            //algum erro dessas validações aqui de null. MAs ta indo.
-            if(updateUserDto.nome() != null) {
-                user.setNome(updateUserDto.nome());
-            } else if(updateUserDto.nomePerfil() != null) {
-                user.setNomePerfil(updateUserDto.nomePerfil());
-            } else if(updateUserDto.email() != null) {
-                user.setEmail(updateUserDto.email());
-            } else if(updateUserDto.senha() != null) {
+            user.setNome(updateUserDto.nome());
+            user.setNomePerfil(updateUserDto.nomePerfil());
+            user.setEmail(updateUserDto.email());
+            user.setPosicao(updateUserDto.posicao());
+            user.setNivel(updateUserDto.nivel());
+
+            if(updateUserDto.senha() != null) {
                 user.setSenha(updateUserDto.senha());
-            } else if(updateUserDto.posicao() != null) {
-                user.setPosicao(updateUserDto.posicao());
-            } else if(updateUserDto.nivel() != null) {
-                user.setNivel(updateUserDto.nivel());
             }
 
             userRepository.save(user);
@@ -61,7 +55,7 @@ public class UserService {
     }
 
     public void deleteById(Integer userId) {
-        var userExists = userRepository.existsById(userId);
+        var userExists = userRepository.existsById(userId); //boolean
         if(userExists) {
             userRepository.deleteById(userId);
         }
