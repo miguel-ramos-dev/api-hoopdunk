@@ -12,5 +12,4 @@ public record UpdateUserDto(
         @NotEmpty //not null + not blank juntos
         String nivel
 //        String foto
-) {
-}
+) {}

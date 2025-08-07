@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Table(name = "usuario")
@@ -13,7 +14,7 @@ public class User {
 
     @Id //tenho que falar que é um id no banco, se comporte como uma PK
     @GeneratedValue(strategy = GenerationType.IDENTITY) //tipo o auto_increment
-    private Integer id;
+    private Long id;
 
     private String nome;
 
@@ -27,14 +28,26 @@ public class User {
 
     private String nivel;
 
-    @Column(columnDefinition = "TEXT")
+    @Lob //Para campos text/blob
     private String foto;
 
     @CreationTimestamp
     private Instant created_at; //quando criar entidade ele ja lanca a datahora
 
+    @OneToMany(mappedBy = "seguidor")
+    private List<Followers> followers;
+
+    @OneToMany(mappedBy = "seguido")
+    private List<Followers> followed;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
+
+    @OneToMany(mappedBy = "idComentador")
+    private List<CommentsPost> commentsPost;
+
     //metodos
-    public Integer getId() {
+    public Long getId() {
         return this.id;
     }
     public String getNome() {
@@ -61,7 +74,23 @@ public class User {
     public Instant getCreatedAt() {
         return this.created_at;
     }
+    public List<Followers> getFollowers() {
+        return followers;
+    }
+    public List<Followers> getFollowed() {
+        return followed;
+    }
+    public List<Post> getPosts() {
+        return posts;
+    }
+    public List<CommentsPost> getCommentsPost() {
+        return commentsPost;
+    }
 
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -83,12 +112,28 @@ public class User {
     public void setFoto(String foto) {
         this.foto = foto;
     }
+    public void setCreatedAt(Instant created_at) {
+        this.created_at = created_at;
+    }
+    public void setFollowers(List<Followers> followers) {
+
+        this.followers = followers;
+    }
+    public void setFollowed(List<Followers> followed) {
+        this.followed = followed;
+    }
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+    public void setCommentsPost(List<CommentsPost> commentsPost) {
+        this.commentsPost = commentsPost;
+    }
 
 
     public User() {}
 
     //p criar usuario em testes enfim.
-    public User(Integer id, String nome, String nomePerfil, String email, String posicao, String nivel, String senha, String foto) {
+    public User(Long id, String nome, String nomePerfil, String email, String posicao, String nivel, String senha, String foto) {
           this.id = id;
           this.nome = nome;
           this.nomePerfil = nomePerfil;

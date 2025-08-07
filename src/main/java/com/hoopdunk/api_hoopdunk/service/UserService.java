@@ -20,14 +20,14 @@ public class UserService {
     }
 
     //retornando id quando criar
-    public Integer createUser(CreateUserDto createUserDto) {
+    public Long createUser(CreateUserDto createUserDto) {
         User usuario = new User(createUserDto);
         var userSaved =  userRepository.save(usuario);
 
         return userSaved.getId(); //retorna só id do cara que foi criado
     }
 
-    public Optional<User> getUserById(Integer userId) {
+    public Optional<User> getUserById(Long userId) {
         return userRepository.findById(userId);
     }
 
@@ -35,7 +35,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void updateUserById (Integer userId, UpdateUserDto updateUserDto) {
+    public void updateUserById (Long userId, UpdateUserDto updateUserDto) {
         var userEntity = userRepository.findById(userId); //entidade User
         if(userEntity.isPresent()) { //se existir user
             var user = userEntity.get(); //ele pega o usuario e lança p essa variavel aqui
@@ -54,7 +54,7 @@ public class UserService {
         }
     }
 
-    public void deleteById(Integer userId) {
+    public void deleteById(Long userId) {
         var userExists = userRepository.existsById(userId); //boolean
         if(userExists) {
             userRepository.deleteById(userId);

@@ -7,7 +7,6 @@ import com.hoopdunk.api_hoopdunk.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -29,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable("userId") Integer id) {
+    public ResponseEntity<User> getUserById(@PathVariable("userId") Long id) {
         var user = userService.getUserById(id);
 
         if(user.isPresent()) {
@@ -48,14 +47,14 @@ public class UserController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable Integer id, @RequestBody @Valid UpdateUserDto data) {
+    public ResponseEntity<Void> updateUser(@PathVariable Long id, @RequestBody @Valid UpdateUserDto data) {
         userService.updateUserById(id, data);
         return ResponseEntity.noContent().build(); //tipo, update, foi, n precisa retornar nenhum user
 
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> deletByid(@PathVariable("userId") Integer id) {//boa pratica retornar nada
+    public ResponseEntity<Void> deletByid(@PathVariable("userId") Long id) {//boa pratica retornar nada
         userService.deleteById(id);
         return ResponseEntity.noContent().build(); //boa pratica esse noContent
     }

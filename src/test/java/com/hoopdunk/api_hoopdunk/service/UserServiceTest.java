@@ -34,7 +34,7 @@ class UserServiceTest {
     private ArgumentCaptor<User> userArgumentCaptor; //com isso eu consigo ver os argumentos que foram passados e validar-los la embaixo.
 
     @Captor
-    private ArgumentCaptor<Integer> idArgumentCaptor; //para testar a função de pegar pelo ID
+    private ArgumentCaptor<Long> idArgumentCaptor; //para testar a função de pegar pelo ID
 
     @Nested
     class createUser {
@@ -45,7 +45,7 @@ class UserServiceTest {
             // Arrange
             //criando instancias do user alem de definir comportamentos e retornos dos mesmos
             var user = new User(
-                    1,
+                    1L,
                     "TesteUnitario",
                     "testeJM",
                     "ts@gmail.com",
@@ -106,7 +106,7 @@ class UserServiceTest {
 
             //Arrange
             var user = new User(
-                    1,
+                    1L,
                     "TesteUnitario",
                     "testeJM",
                     "ts@gmail.com",
@@ -129,7 +129,7 @@ class UserServiceTest {
         void shouldGetUserWithSuccessWhenOptionalIsEmpty() {
 
             //Arrange
-            Integer userId = 1;
+            Long userId = 1L;
 
             //Optional.empty retorna porra nenhuma
             doReturn(Optional.empty()).when(userRepository).findById(idArgumentCaptor.capture());
@@ -151,7 +151,7 @@ class UserServiceTest {
         void shouldReturnAllUsersWithSuccess() {
             //Arrange
             var user = new User(
-                    1,
+                    1L,
                     "TesteUnitario",
                     "testeJM",
                     "ts@gmail.com",
@@ -181,7 +181,7 @@ class UserServiceTest {
         void shouldDeleteUserWithSuccessWhenUserExists() {
 
             //Arrange
-            var userId = 3;
+            var userId = 3L;
             doReturn(true).when(userRepository).existsById(idArgumentCaptor.capture()); //funcao do exists by id
 
             doNothing().when(userRepository).deleteById(idArgumentCaptor.capture()); //funcao mocada do deleteBydId(por que é Void o retorno la)
@@ -207,7 +207,7 @@ class UserServiceTest {
         void shouldNotDeleteUserWithSuccessWhenUserNotExists() {
 
             //Arrange
-            var userId = 3;
+            var userId = 3L;
             doReturn(false).when(userRepository).existsById(idArgumentCaptor.capture()); //funcao do exists by id
 
             //já que o metodo nem vai chegar a excluir eu tirei a "mocagem" do metodo.
@@ -237,7 +237,7 @@ class UserServiceTest {
         void shouldUpdateAUserWhenUserExistsAndDataExistsToo() {
             //Arrange
             var user = new User(
-                    5,
+                    5L,
                     "TesteUnitario",
                     "testeJM",
                     "ts@gmail.com",
@@ -284,7 +284,7 @@ class UserServiceTest {
         @Test
         void shouldNotUpdateUserWhenUserNotExists() {
             //Arrange
-            var userId = 5;
+            var userId = 5L;
 
             var updateUserDto = new UpdateUserDto (
                     "TesteAtualizado",
