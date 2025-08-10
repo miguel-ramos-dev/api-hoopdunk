@@ -46,6 +46,13 @@ public class User {
     @OneToMany(mappedBy = "idComentador")
     private List<CommentsPost> commentsPost;
 
+    @OneToMany(mappedBy = "user")
+    private List<CourtPlayers> courtPlayers;
+
+    @OneToMany(mappedBy = "user")
+    private List<EventPlayers> eventPlayers;
+
+
     //metodos
     public Long getId() {
         return this.id;

@@ -13,7 +13,7 @@ public class Followers {
     private PrimaryKeyFollowers id;
 
     @ManyToOne
-    @MapsId("idSeguidor")
+    @MapsId("idSeguidor") //pega id da entidade e joga la pra outra entidade (da chave composta)
     @JoinColumn(name = "idSeguidor")
     private User seguidor;
 
