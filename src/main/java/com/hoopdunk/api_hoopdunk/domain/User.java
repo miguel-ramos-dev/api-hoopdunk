@@ -9,7 +9,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "usuario")
-
 public class User {
 
     @Id //tenho que falar que é um id no banco, se comporte como uma PK
@@ -18,6 +17,7 @@ public class User {
 
     private String nome;
 
+    @Column(name = "nomePerfil", length = 20)
     private String nomePerfil;
 
     private String email;
@@ -32,7 +32,8 @@ public class User {
     private String foto;
 
     @CreationTimestamp
-    private Instant created_at; //quando criar entidade ele ja lanca a datahora
+    @Column(name = "created_at")
+    private Instant createdAt; //quando criar entidade ele ja lanca a datahora
 
     @OneToMany(mappedBy = "seguidor")
     private List<Followers> followers;
@@ -79,7 +80,7 @@ public class User {
         return this.foto;
     }
     public Instant getCreatedAt() {
-        return this.created_at;
+        return this.createdAt;
     }
     public List<Followers> getFollowers() {
         return followers;
@@ -120,7 +121,7 @@ public class User {
         this.foto = foto;
     }
     public void setCreatedAt(Instant created_at) {
-        this.created_at = created_at;
+        this.createdAt = created_at;
     }
     public void setFollowers(List<Followers> followers) {
 

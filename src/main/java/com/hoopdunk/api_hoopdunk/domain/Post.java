@@ -19,7 +19,7 @@ public class Post {
     private String descricao;
 
     @Lob
-    @Column(name = "imgPost")
+    @Column(name = "foto")
     private String imgPost;
 
     @CreationTimestamp
@@ -28,7 +28,7 @@ public class Post {
 
     //relação com o user
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "idUsuario")
     private User user;
 
     @OneToMany(mappedBy = "idPost")

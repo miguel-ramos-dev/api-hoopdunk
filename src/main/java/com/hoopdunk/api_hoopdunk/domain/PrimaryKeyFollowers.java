@@ -17,7 +17,6 @@ public class PrimaryKeyFollowers implements Serializable { //Hibernate precisa s
 
     public PrimaryKeyFollowers() {} //pro JPA funcionar corretamente
 
-
     //para testes e etc
     public PrimaryKeyFollowers(Long idSeguido, Long idSeguidor){
         this.idSeguido = idSeguido;

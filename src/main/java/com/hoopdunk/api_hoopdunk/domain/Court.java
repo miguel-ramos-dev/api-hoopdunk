@@ -7,7 +7,7 @@ import java.time.Instant;
 import java.util.List;
 
 @Entity
-@Table(name = "quadras")
+@Table(name = "quadra")
 public class Court {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public class Court {
 
     @Column(name = "created_at")
     @CreationTimestamp
-    private Instant created_at;
+    private Instant createdAt;
 
     @OneToMany(mappedBy = "quadra")
     private List<CourtPlayers> courtPlayers;
@@ -41,14 +41,14 @@ public class Court {
 
     public Court() {}
 
-    public Court(Long id, String nome, String descricao, String nivelQuadra, String localizao, String foto, Instant created_at, List<CourtPlayers> courtPlayers) {
+    public Court(Long id, String nome, String descricao, String nivelQuadra, String localizao, String foto, Instant createdAt, List<CourtPlayers> courtPlayers) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.nivelQuadra = nivelQuadra;
         this.localizao = localizao;
         this.foto = foto;
-        this.created_at = created_at;
+        this.createdAt = createdAt;
         this.courtPlayers = courtPlayers;
     }
 
@@ -70,8 +70,8 @@ public class Court {
     public String getFoto() {
         return foto;
     }
-    public Instant getCreated_at() {
-        return created_at;
+    public Instant getCreatedAt() {
+        return createdAt;
     }
     public List<CourtPlayers> getCourtPlayers() {
         return courtPlayers;
@@ -96,8 +96,8 @@ public class Court {
     public void setFoto(String foto) {
         this.foto = foto;
     }
-    public void setCreated_at(Instant created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(Instant created_at) {
+        this.createdAt = created_at;
     }
     public void setCourtPlayers(List<CourtPlayers> courtPlayers) {
         this.courtPlayers = courtPlayers;

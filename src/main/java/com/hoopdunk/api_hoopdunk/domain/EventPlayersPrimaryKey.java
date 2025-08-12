@@ -11,14 +11,14 @@ public class EventPlayersPrimaryKey implements Serializable {
     @Column(name = "idEvento", nullable = false)
     private Long idEvento;
 
-    @Column(name = "idUsuario", nullable = false)
-    private Long idUser;
+    @Column(name = "idJogador", nullable = false)
+    private Long idJogador;
 
     public EventPlayersPrimaryKey(){}
 
-    public EventPlayersPrimaryKey(Long idEvento, Long idUser) {
+    public EventPlayersPrimaryKey(Long idEvento, Long idJogador) {
         this.idEvento = idEvento;
-        this.idUser = idUser;
+        this.idJogador = idJogador;
     }
 
     public Long getIdEvento() {
@@ -29,11 +29,11 @@ public class EventPlayersPrimaryKey implements Serializable {
         this.idEvento = idEvento;
     }
 
-    public Long getIdUser() {
-        return idUser;
+    public Long getidJogador() {
+        return idJogador;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
+    public void setidJogador(Long idJogador) {
+        this.idJogador = idJogador;
     }
 }

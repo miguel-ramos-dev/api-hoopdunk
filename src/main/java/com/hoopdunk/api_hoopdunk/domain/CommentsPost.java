@@ -3,14 +3,14 @@ package com.hoopdunk.api_hoopdunk.domain;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "comentariosPost")
+@Table(name = "comentarioPost")
 public class CommentsPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "idComentador")
+    @JoinColumn(name = "idUsuario")
     private User idComentador;
 
     @ManyToOne
@@ -19,6 +19,10 @@ public class CommentsPost {
 
     @Column(name = "descricao", length = 45, nullable = false)
     private String descricao;
+
+    @Lob
+    @Column(name = "fotoComentario")
+    private String fotoComentario;
 
 
 }

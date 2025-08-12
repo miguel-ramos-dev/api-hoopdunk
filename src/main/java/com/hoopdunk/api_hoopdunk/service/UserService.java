@@ -22,9 +22,16 @@ public class UserService {
     //retornando id quando criar
     public Long createUser(CreateUserDto createUserDto) {
         User usuario = new User(createUserDto);
-        var userSaved =  userRepository.save(usuario);
 
-        return userSaved.getId(); //retorna só id do cara que foi criado
+        if(userRepository.findByNomePerfil(usuario.getNomePerfil()).isPresent()) {
+            throw new RuntimeException("Este nome de perfil já está em uso");
+        } else if(userRepository.findByEmail(usuario.getEmail()).isPresent()) {
+            throw new RuntimeException("Este email já está em uso!");
+        } else {
+            var userSaved =  userRepository.save(usuario);
+
+            return userSaved.getId(); //retorna só id do cara que foi criado
+        }
     }
 
     public Optional<User> getUserById(Long userId) {

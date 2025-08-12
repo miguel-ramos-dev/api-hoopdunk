@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "eventos")
+@Table(name = "evento")
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +41,7 @@ public class Event {
     @JoinColumn(name = "idQuadra")
     private Court quadra;
 
-    @OneToMany
+    @OneToMany(mappedBy = "evento")
     private List<EventPlayers> eventPlayers;
 
     private Event() {}
