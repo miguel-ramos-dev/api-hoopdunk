@@ -3,6 +3,7 @@ package com.hoopdunk.api_hoopdunk.service;
 import com.hoopdunk.api_hoopdunk.domain.User;
 import com.hoopdunk.api_hoopdunk.dto.user.CreateUserDto;
 import com.hoopdunk.api_hoopdunk.dto.user.UpdateUserDto;
+import com.hoopdunk.api_hoopdunk.exceptions.UserExistsException;
 import com.hoopdunk.api_hoopdunk.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +25,9 @@ public class UserService {
         User usuario = new User(createUserDto);
 
         if(userRepository.findByNomePerfil(usuario.getNomePerfil()).isPresent()) {
-            throw new RuntimeException("Este nome de perfil já está em uso");
+            throw new UserExistsException("Este nome de perfil já está em uso");
         } else if(userRepository.findByEmail(usuario.getEmail()).isPresent()) {
-            throw new RuntimeException("Este email já está em uso!");
+            throw new UserExistsException("Este email já está em uso!");
         } else {
             var userSaved =  userRepository.save(usuario);
 
